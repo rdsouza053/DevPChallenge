@@ -1,0 +1,7 @@
+---
+- name: Install httpd Package
+  yum: name=httpd state=latest
+
+- name: Install Mod_SSL
+  yum: name=mod_ssl state=latest
+

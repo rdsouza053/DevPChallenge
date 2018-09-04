@@ -1,0 +1,20 @@
+---
+- name: Copy CA KEY
+  copy: src=/usr/local/ca.key dest=/etc/pki/tls/private owner=root group=root mode=0644
+
+- name: Copy CA Certificate
+  copy: src=/usr/local/ca.crt dest=/etc/pki/tls/certs owner=root group=root mode=0644
+
+- name: Copy SSL Conf
+  copy: src=files/ssl_conf dest=/etc/httpd/conf.d/ssl.conf owner=root group=root mode=0644
+
+- name: Copy httpd conf
+  copy: src=files/httpd_conf dest=/etc/httpd/conf/httpd.conf owner=root group=root mode=0644
+
+- name: Test Configuration
+  command: apachectl configtest
+
+- name: Copy index.html file
+  copy: src=files/index.html dest=/var/www/html
+  notify:
+  - restart apache

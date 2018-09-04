@@ -1,0 +1,15 @@
+---
+ - name: Create ec2 instance
+   hosts: localhost
+   connection: local
+   gather_facts: false
+   user: root
+   roles:
+    - ec2
+
+ - name: Configure Instance
+   hosts: apache
+   become: true
+   gather_facts: true
+   roles:
+    - apache
